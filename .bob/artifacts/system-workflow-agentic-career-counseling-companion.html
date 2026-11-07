@@ -1,0 +1,285 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>System Workflow</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    background: #0f1b2d;
+    color: #e8edf5;
+    padding: 32px 24px 24px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 11px;
+    color: #7b9bb8;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .step {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .step-num {
+    width: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    border-radius: 50%;
+    height: 36px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  .step-box {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-left: 12px;
+    position: relative;
+  }
+
+  .step-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .step-detail {
+    font-size: 11px;
+    line-height: 1.55;
+    color: #b8cce0;
+  }
+
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    width: 100%;
+  }
+  .arrow svg {
+    display: block;
+  }
+
+  /* Colors per step */
+  .s1 .step-num { background: #1d6fa4; }
+  .s1 .step-box { background: #0d2c42; border: 1px solid #1d6fa4; }
+  .s1 .step-title { color: #5cb8ff; }
+
+  .s2 .step-num { background: #1a7a5e; }
+  .s2 .step-box { background: #0a2d22; border: 1px solid #1a7a5e; }
+  .s2 .step-title { color: #43d9a2; }
+
+  .s3 .step-num { background: #7c3aed; }
+  .s3 .step-box { background: #1e0d3a; border: 1px solid #7c3aed; }
+  .s3 .step-title { color: #c084fc; }
+
+  .s4 .step-num { background: #b45309; }
+  .s4 .step-box { background: #2c1800; border: 1px solid #b45309; }
+  .s4 .step-title { color: #fbbf24; }
+
+  .s5 .step-num { background: #be185d; }
+  .s5 .step-box { background: #2d0a1c; border: 1px solid #be185d; }
+  .s5 .step-title { color: #f9a8d4; }
+
+  .s6 .step-num { background: #0d7a6f; }
+  .s6 .step-box { background: #072623; border: 1px solid #0d7a6f; }
+  .s6 .step-title { color: #2dd4bf; }
+
+  .s7 .step-num { background: #1d4ed8; }
+  .s7 .step-box { background: #0b1a40; border: 1px solid #1d4ed8; }
+  .s7 .step-title { color: #93c5fd; }
+
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-right: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .badge-api  { background: #1d6fa4; color: #d0ecff; }
+  .badge-ai   { background: #7c3aed; color: #ede9fe; }
+  .badge-db   { background: #166534; color: #bbf7d0; }
+  .badge-ext  { background: #92400e; color: #fef3c7; }
+
+  .ibm-box {
+    margin: 0 auto;
+    margin-top: 0;
+    max-width: 720px;
+    background: linear-gradient(135deg, #1e0d3a, #0d1e3a);
+    border: 2px solid #7c3aed;
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+  }
+  .ibm-box .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #9d7fea; margin-bottom: 4px; }
+  .ibm-box .model { font-size: 15px; font-weight: 700; color: #c084fc; }
+  .ibm-box .sub   { font-size: 11px; color: #a78bfa; margin-top: 2px; }
+
+  .two-col {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+  }
+  .two-col .step { flex: 1; }
+
+  footer {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 11px;
+    color: #3d5a72;
+    border-top: 1px solid #1a2e3f;
+    padding-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<h1>System Workflow — Agentic Career Counseling Companion</h1>
+<p class="subtitle">End-to-End Agentic Flow  |  IBM Granite · WatsonX.ai · FastAPI · React</p>
+
+<div class="flow">
+
+  
+  <div class="step s1">
+    <div class="step-num">1</div>
+    <div class="step-box">
+      <div class="step-title"><span class="badge badge-api">POST</span>/api/auth/register  →  JWT Token Issued</div>
+      <div class="step-detail">Student registers with name, email, password. Password hashed with <strong>bcrypt</strong>. JWT token returned via <strong>python-jose</strong>. Token secures all subsequent API calls.</div>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <svg width="2" height="22"><line x1="1" y1="0" x2="1" y2="16" stroke="#2d4a60" stroke-width="2"></line><polygon points="1,22 -4,12 6,12" fill="#2d4a60"></polygon></svg>
+  </div>
+
+  
+  <div class="step s2">
+    <div class="step-num">2</div>
+    <div class="step-box">
+      <div class="step-title"><span class="badge badge-db">DB</span>Academic Profile → StudentProfile + AcademicRecord (SQLite)</div>
+      <div class="step-detail">Student fills: GPA, field of study, grade level, skills, interests, extracurriculars, work-style preference. Subject grades stored as individual <strong>AcademicRecord</strong> rows (subject, grade, score, semester, year).</div>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <svg width="2" height="22"><line x1="1" y1="0" x2="1" y2="16" stroke="#2d4a60" stroke-width="2"></line><polygon points="1,22 -4,12 6,12" fill="#2d4a60"></polygon></svg>
+  </div>
+
+  
+  <div class="step s2">
+    <div class="step-num">3</div>
+    <div class="step-box">
+      <div class="step-title"><span class="badge badge-db">DB</span>3× Psychometric Assessments → Assessment Table</div>
+      <div class="step-detail">
+        <strong>Interest</strong> — 10 Qs (analytical, technical, social, creative, leadership, medical, quantitative, business, humanitarian, research)<br />
+        <strong>Aptitude</strong> — 8 Qs (numerical, verbal, spatial, digital_literacy, technical_reasoning, stress_tolerance, multitasking, analytical)<br />
+        <strong>Personality</strong> — 8 Qs (extroversion, conscientiousness, adaptability, empathy, risk_tolerance, specialization, achievement_drive, structure_preference)<br />
+        Likert 1–5 → normalized to <strong>0–100 per dimension</strong> → stored as JSON in Assessment table.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <svg width="2" height="22"><line x1="1" y1="0" x2="1" y2="16" stroke="#2d4a60" stroke-width="2"></line><polygon points="1,22 -4,12 6,12" fill="#2d4a60"></polygon></svg>
+  </div>
+
+  
+  <div class="step s3">
+    <div class="step-num">4</div>
+    <div class="step-box">
+      <div class="step-title"><span class="badge badge-ai">IBM AI</span>POST /api/career/recommend → CareerCounselingAgent</div>
+      <div class="step-detail">
+        <strong>_build_student_data()</strong> aggregates all profile + academic records + latest 3 assessments from SQLite.<br />
+        <strong>market_service.get_market_overview()</strong> fetches live job trends (JSearch API / fallback).<br />
+        <strong>CAREER_RECOMMENDATION_PROMPT</strong> injects <strong>14+ variables</strong> (name, GPA, grade_level, field_of_study, interests, skills, extracurriculars, work_style, location, academic_records, interest_scores, aptitude_scores, personality_scores, market_context).<br />
+        Sent to <strong>IBM Granite ibm/granite-3-8b-instruct</strong> — MAX_NEW_TOKENS=1024, TEMP=0.7, TOP_P=0.95.
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <svg width="2" height="22"><line x1="1" y1="0" x2="1" y2="16" stroke="#2d4a60" stroke-width="2"></line><polygon points="1,22 -4,12 6,12" fill="#2d4a60"></polygon></svg>
+  </div>
+
+  
+  <div class="ibm-box" style="width:100%">
+    <div class="label">IBM Granite Output (ibm/granite-3-8b-instruct on WatsonX.ai)</div>
+    <div class="model">Top 3 Career Pathways  ·  6-Step 12-Month Action Plan  ·  Skills Gap Analysis</div>
+    <div class="sub">+ 2 Alternative Pathways  ·  Motivational Summary  ·  Persisted to CareerPlan table (confidence_score = 0.85)</div>
+  </div>
+
+  <div class="arrow">
+    <svg width="2" height="22"><line x1="1" y1="0" x2="1" y2="16" stroke="#2d4a60" stroke-width="2"></line><polygon points="1,22 -4,12 6,12" fill="#2d4a60"></polygon></svg>
+  </div>
+
+  
+  <div class="two-col">
+    <div class="step s5">
+      <div class="step-num">5</div>
+      <div class="step-box">
+        <div class="step-title"><span class="badge badge-ai">IBM AI</span>Chat Counselor</div>
+        <div class="step-detail">POST /api/career/chat<br />Last <strong>6 exchanges</strong> from ChatSession replayed to IBM Granite → context-aware multi-turn counseling. Full history persisted in SQLite.</div>
+      </div>
+    </div>
+    <div class="step s6">
+      <div class="step-num">6</div>
+      <div class="step-box">
+        <div class="step-title"><span class="badge badge-ext">EXT</span>Market Intelligence</div>
+        <div class="step-detail">GET /api/market/overview<br /><strong>JSearch API</strong> (httpx async) → fallback: 10 hot roles, salary $75k–$190k, AI/ML growth <strong>40%</strong> by 2030, top 10 companies.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <svg width="2" height="22"><line x1="1" y1="0" x2="1" y2="16" stroke="#2d4a60" stroke-width="2"></line><polygon points="1,22 -4,12 6,12" fill="#2d4a60"></polygon></svg>
+  </div>
+
+  
+  <div class="step s7">
+    <div class="step-num">7</div>
+    <div class="step-box">
+      <div class="step-title">React + Vite Frontend Dashboard (Port 3000)</div>
+      <div class="step-detail">8 pages: Register · Login · Dashboard · Profile · Assessment · CareerPlan · Chat · Market. Career match score charts, skills radar, market trends — all rendered with <strong>Recharts</strong>. API calls via <strong>Axios</strong> with JWT interceptors.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Made with IBM Bob</footer>
+</body>
+</html>

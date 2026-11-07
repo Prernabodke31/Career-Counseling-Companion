@@ -1,0 +1,51 @@
+{
+  "name": "Agentic Career Counseling Companion",
+  "description": "AI-powered personalized career guidance system using IBM Granite on WatsonX.ai. Multi-agent architecture with psychometric assessments, live market intelligence, and conversational AI counseling.",
+  "domain": "Education / Career Guidance",
+  "version": "1.0.0",
+  "author": "IBM University Engagement Program",
+  "tech_stack": {
+    "ai_model": "ibm/granite-3-8b-instruct",
+    "ai_platform": "IBM WatsonX.ai",
+    "backend": "FastAPI 0.115 + Python 3.12",
+    "frontend": "React 18 + Vite 5",
+    "database": "SQLite + SQLAlchemy 2.0",
+    "ai_sdk": "ibm-watsonx-ai 1.9.1",
+    "agent_framework": "LangChain 0.3.25 + LangChain-IBM 0.3.8"
+  },
+  "features": [
+    "Personalized career pathway recommendations using IBM Granite",
+    "26-question psychometric assessment engine (Interest, Aptitude, Personality)",
+    "Real-time labor market intelligence via JSearch API",
+    "Multi-turn AI chat counselor with conversation memory",
+    "Skills gap analysis for any target career",
+    "JWT authentication + SQLite zero-setup database",
+    "Mock mode for demo without IBM Cloud credentials"
+  ],
+  "api_endpoints": [
+    "POST /api/auth/register",
+    "POST /api/auth/login",
+    "POST /api/students/profile",
+    "POST /api/assessment/submit",
+    "POST /api/career/recommend",
+    "POST /api/career/chat",
+    "POST /api/career/skills-gap",
+    "GET /api/market/overview"
+  ],
+  "setup": {
+    "backend": "cd backend && py -3.12 -m pip install -r requirements.txt && py -3.12 main.py",
+    "frontend": "cd frontend && npm install && npm run dev"
+  },
+  "ports": {
+    "backend": 8000,
+    "frontend": 3000
+  },
+  "ibm_model": {
+    "model_id": "ibm/granite-3-8b-instruct",
+    "max_new_tokens": 1024,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "top_k": 50,
+    "repetition_penalty": 1.1
+  }
+}

@@ -1,0 +1,322 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Architecture Diagram</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    background: #0a1628;
+    color: #e2eaf5;
+    padding: 28px 24px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 10px;
+    color: #5a7a99;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+
+  /* ── layout ── */
+  .arch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  /* ── layer boxes ── */
+  .layer {
+    width: 100%;
+    border-radius: 12px;
+    padding: 14px 18px;
+    position: relative;
+  }
+  .layer-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .layer-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  /* ── connector ── */
+  .connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2px 0;
+    gap: 0;
+  }
+  .conn-line {
+    width: 2px;
+    height: 18px;
+    background: #1e3a52;
+  }
+  .conn-label {
+    font-size: 9px;
+    color: #4a7a99;
+    background: #0a1628;
+    padding: 1px 8px;
+    border-radius: 10px;
+    border: 1px solid #1e3a52;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+  .conn-arrow {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid #1e3a52;
+    margin-top: 1px;
+  }
+
+  /* ── pill tags ── */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill {
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ── middle split row ── */
+  .split-row {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+  }
+  .split-row .layer { flex: 1; }
+
+  /* ── FRONTEND ── */
+  .fe { background: #0c2340; border: 1.5px solid #1d6fa4; }
+  .fe .layer-label { color: #5cb8ff; }
+  .fe .layer-title { color: #5cb8ff; }
+  .fe .pill { background: #0d3560; color: #93c5fd; border: 1px solid #1d6fa4; }
+
+  /* ── BACKEND ── */
+  .be { background: #0d2018; border: 1.5px solid #16a34a; }
+  .be .layer-label { color: #4ade80; }
+  .be .layer-title { color: #4ade80; }
+  .be .pill { background: #0a2a14; color: #86efac; border: 1px solid #16a34a; }
+
+  /* ── IBM WatsonX ── */
+  .ibm { background: #1a0d36; border: 2px solid #7c3aed; }
+  .ibm .layer-label { color: #a78bfa; }
+  .ibm .layer-title { color: #c084fc; }
+  .ibm .pill { background: #2a0a50; color: #e9d5ff; border: 1px solid #7c3aed; }
+
+  /* ── JSearch ── */
+  .jsearch { background: #1c1000; border: 1.5px solid #d97706; }
+  .jsearch .layer-label { color: #fbbf24; }
+  .jsearch .layer-title { color: #fbbf24; }
+  .jsearch .pill { background: #2a1800; color: #fde68a; border: 1px solid #d97706; }
+
+  /* ── SQLite ── */
+  .db { background: #001a20; border: 1.5px solid #0891b2; }
+  .db .layer-label { color: #38bdf8; }
+  .db .layer-title { color: #38bdf8; }
+  .db .pill { background: #002535; color: #bae6fd; border: 1px solid #0891b2; }
+
+  /* ── route table ── */
+  .routes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+    margin-top: 8px;
+  }
+  .route-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 11px;
+  }
+  .route-method {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .post { background: #1a4a20; color: #4ade80; }
+  .get  { background: #0c2a50; color: #60a5fa; }
+  .route-path { color: #a0c4de; font-family: monospace; font-size: 10.5px; }
+
+  /* ── tables row ── */
+  .tables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .tbl {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #002030;
+    border: 1px solid #0e6a8a;
+    color: #7dd3fc;
+    font-family: monospace;
+  }
+
+  footer {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 11px;
+    color: #2a4a62;
+    border-top: 1px solid #142232;
+    padding-top: 12px;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Architecture Diagram — Agentic Career Counseling Companion</h1>
+<p class="subtitle">FastAPI · React + Vite · IBM Granite · WatsonX.ai · SQLite</p>
+
+<div class="arch">
+
+  
+  <div class="layer fe">
+    <div class="layer-label">Layer 1 — Presentation</div>
+    <div class="layer-title">Frontend  ·  React 18 + Vite 5  ·  Port 3000</div>
+    <div class="pills">
+      <span class="pill">Register</span>
+      <span class="pill">Login</span>
+      <span class="pill">Dashboard</span>
+      <span class="pill">Profile</span>
+      <span class="pill">Assessment</span>
+      <span class="pill">Career Plan</span>
+      <span class="pill">Chat</span>
+      <span class="pill">Market</span>
+      <span class="pill">Recharts (charts)</span>
+      <span class="pill">Axios + JWT interceptors</span>
+    </div>
+  </div>
+
+  <div class="connector">
+    <div class="conn-line"></div>
+    <div class="conn-label">HTTP REST  |  Vite proxy → :8000  |  JWT Bearer Token</div>
+    <div class="conn-line"></div>
+    <div class="conn-arrow"></div>
+  </div>
+
+  
+  <div class="layer be">
+    <div class="layer-label">Layer 2 — Application / Agent</div>
+    <div class="layer-title">Backend  ·  FastAPI 0.115 + Python 3.12  ·  Port 8000</div>
+    <div class="routes">
+      <div class="route-row"><span class="route-method post">POST</span><span class="route-path">/api/auth/register · /api/auth/login</span></div>
+      <div class="route-row"><span class="route-method post">POST</span><span class="route-path">/api/students/profile · /records</span></div>
+      <div class="route-row"><span class="route-method post">POST</span><span class="route-path">/api/assessment/submit</span></div>
+      <div class="route-row"><span class="route-method get">GET</span><span class="route-path">/api/assessment/questions/{type}</span></div>
+      <div class="route-row"><span class="route-method post">POST</span><span class="route-path">/api/career/recommend</span></div>
+      <div class="route-row"><span class="route-method post">POST</span><span class="route-path">/api/career/chat</span></div>
+      <div class="route-row"><span class="route-method post">POST</span><span class="route-path">/api/career/skills-gap</span></div>
+      <div class="route-row"><span class="route-method get">GET</span><span class="route-path">/api/market/overview</span></div>
+    </div>
+    <div class="pills" style="margin-top:10px">
+      <span class="pill">CareerCounselingAgent</span>
+      <span class="pill">JWT Auth (python-jose)</span>
+      <span class="pill">bcrypt hashing</span>
+      <span class="pill">LangChain 0.3.25</span>
+      <span class="pill">Swagger /api/docs</span>
+    </div>
+  </div>
+
+  
+  <div class="connector" style="width:100%;flex-direction:row;justify-content:space-around;padding:0;height:44px;position:relative;display:flex">
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1">
+      <div class="conn-line"></div>
+      <div class="conn-label">ibm-watsonx-ai SDK</div>
+      <div class="conn-line"></div>
+      <div class="conn-arrow"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1">
+      <div class="conn-line"></div>
+      <div class="conn-label">httpx async</div>
+      <div class="conn-line"></div>
+      <div class="conn-arrow"></div>
+    </div>
+  </div>
+
+  <div class="split-row">
+
+    
+    <div class="layer ibm">
+      <div class="layer-label">Layer 3a — AI Engine</div>
+      <div class="layer-title">IBM WatsonX.ai</div>
+      <div class="pills">
+        <span class="pill">ibm/granite-3-8b-instruct</span>
+        <span class="pill">MAX_NEW_TOKENS = 1024</span>
+        <span class="pill">TEMPERATURE = 0.7</span>
+        <span class="pill">TOP_P = 0.95 · TOP_K = 50</span>
+        <span class="pill">@lru_cache singleton</span>
+        <span class="pill">Mock fallback mode</span>
+      </div>
+    </div>
+
+    
+    <div class="layer jsearch">
+      <div class="layer-label">Layer 3b — Market Data</div>
+      <div class="layer-title">JSearch API (RapidAPI)</div>
+      <div class="pills">
+        <span class="pill">Live job listings</span>
+        <span class="pill">10 hot roles fallback</span>
+        <span class="pill">Salary $75k–$190k</span>
+        <span class="pill">AI/ML growth 40% by 2030</span>
+        <span class="pill">Top 10 hiring companies</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="connector">
+    <div class="conn-line"></div>
+    <div class="conn-label">SQLAlchemy ORM · auto-created</div>
+    <div class="conn-line"></div>
+    <div class="conn-arrow"></div>
+  </div>
+
+  
+  <div class="layer db">
+    <div class="layer-label">Layer 4 — Data Persistence</div>
+    <div class="layer-title">SQLite Database  ·  career_counselor.db  ·  Zero Setup</div>
+    <div class="tables">
+      <span class="tbl">users</span>
+      <span class="tbl">student_profiles</span>
+      <span class="tbl">academic_records</span>
+      <span class="tbl">assessments</span>
+      <span class="tbl">career_plans</span>
+      <span class="tbl">chat_sessions</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>Made with IBM Bob</footer>
+</body>
+</html>

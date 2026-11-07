@@ -1,0 +1,90 @@
+PROBLEM STATEMENT
+IBM University Engagement Program
+Project: Agentic Career Counseling Companion
+
+================================================================================
+DOMAIN: Education / Career Guidance / AI-Powered Student Support
+================================================================================
+
+PROBLEM STATEMENT
+-----------------
+Students and fresh graduates face serious difficulty in choosing the right career
+path. Traditional career counseling is:
+
+  - Generic and not tailored to individual academic performance, GPA, or grades
+  - Disconnected from real-time labor market trends (salaries, in-demand skills)
+  - Unable to assess personality, aptitude, and interests as a holistic profile
+  - Expensive or inaccessible for students in developing regions
+
+Without personalized, data-driven guidance, students make uninformed decisions
+that lead to career dissatisfaction, skills mismatches, and wasted education.
+
+================================================================================
+PROPOSED SOLUTION
+================================================================================
+
+An Agentic AI-powered Career Counseling Companion using IBM Granite
+(ibm/granite-3-8b-instruct) on IBM WatsonX.ai that delivers:
+
+1. PERSONALIZED CAREER RECOMMENDATIONS
+   - Analyzes student GPA, subject grades, skills, interests, and 3 psychometric
+     assessment scores to recommend Top 3 Career Pathways with match reasoning.
+
+2. TRIPLE ASSESSMENT ENGINE
+   - Interest Assessment   : 10 questions across 10 dimensions
+   - Aptitude Assessment   : 8 questions across 8 dimensions
+   - Personality Assessment: 8 questions across 8 dimensions
+   - Scored 1-5 Likert scale, normalized to 0-100 per dimension
+   - Injected into IBM Granite as structured JSON
+
+3. AI CHAT COUNSELOR
+   - /api/career/chat endpoint powered by IBM Granite
+   - Maintains last 6 conversation exchanges for context-aware multi-turn guidance
+
+4. LABOR MARKET INTELLIGENCE
+   - JSearch API (RapidAPI) with curated fallback data
+   - 10 hot roles, salary ranges $75k-$190k USD
+   - Sector growth rates: AI/ML 40%, Cybersecurity 32%, Data Science 28% by 2030
+
+5. SKILLS GAP ANALYZER
+   - /api/career/skills-gap endpoint using IBM Granite
+   - Identifies missing skills, recommends certifications, estimates time-to-close
+
+6. FULL-STACK WEB APPLICATION
+   - React 18 + Vite 5 frontend (8 pages)
+   - FastAPI 0.115 + Python 3.12 backend
+   - SQLite database (zero-setup, auto-created)
+   - JWT authentication
+
+================================================================================
+TECHNOLOGY STACK
+================================================================================
+
+AI Model        : ibm/granite-3-8b-instruct on IBM WatsonX.ai
+AI SDK          : ibm-watsonx-ai 1.9.1
+Agent Framework : LangChain 0.3.25 + LangChain-IBM 0.3.8
+Backend         : FastAPI 0.115, Python 3.12
+Database        : SQLAlchemy 2.0 + SQLite
+Frontend        : React 18 + Vite 5, Recharts, Axios
+Authentication  : JWT (python-jose) + bcrypt
+Market Data     : JSearch API (RapidAPI) via httpx 0.28
+
+================================================================================
+KEY NOVELTIES
+================================================================================
+
+1. 26-question psychometric scores injected as JSON into IBM Granite prompt
+2. 14+ unique student variables per IBM Granite call (hyper-personalization)
+3. Live market data grounded career recommendations (JSearch API)
+4. Multi-turn chat memory (last 6 exchanges) for deep counseling sessions
+5. Dedicated /api/career/skills-gap agentic endpoint
+6. Auto mock mode - full demo without IBM Cloud credentials
+7. Clean layered architecture: agents/ | services/ | routes/ | models/
+
+================================================================================
+GITHUB REPOSITORY
+================================================================================
+
+URL: https://github.com/[your-username]/career-counseling-companion
+
+================================================================================

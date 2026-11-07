@@ -1,0 +1,261 @@
+/* ── Global Styles ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ibm-blue: #0f62fe;
+  --ibm-blue-dark: #0043ce;
+  --ibm-blue-light: #d0e2ff;
+  --ibm-purple: #6929c4;
+  --ibm-teal: #009d9a;
+  --ibm-green: #198038;
+  --ibm-red: #da1e28;
+  --ibm-yellow: #f1c21b;
+  --surface-0: #ffffff;
+  --surface-1: #f4f4f4;
+  --surface-2: #e0e0e0;
+  --text-primary: #161616;
+  --text-secondary: #525252;
+  --text-muted: #8d8d8d;
+  --border: #e0e0e0;
+  --shadow: 0 2px 8px rgba(0,0,0,0.10);
+  --radius: 8px;
+  --sidebar-w: 240px;
+}
+
+html { font-size: 15px; }
+body {
+  font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  background: var(--surface-1);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+a { color: var(--ibm-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button { cursor: pointer; font-family: inherit; }
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.app-shell { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  background: #161616;
+  color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+}
+.sidebar-logo {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid #393939;
+}
+.sidebar-logo h2 { font-size: 0.85rem; font-weight: 600; color: #78a9ff; letter-spacing: 0.05em; }
+.sidebar-logo p { font-size: 0.7rem; color: #8d8d8d; margin-top: 2px; }
+
+.sidebar-nav { flex: 1; padding: 8px 0; overflow-y: auto; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px;
+  color: #c6c6c6;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border-left: 3px solid transparent;
+}
+.nav-item:hover { background: #262626; color: #f4f4f4; }
+.nav-item.active { background: #0f3460; color: #78a9ff; border-left-color: #78a9ff; }
+.nav-item svg { flex-shrink: 0; }
+
+.sidebar-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #393939;
+  font-size: 0.72rem;
+  color: #8d8d8d;
+}
+
+.main-content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  background: var(--surface-0);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-title { font-size: 1rem; font-weight: 600; }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.user-badge {
+  background: var(--ibm-blue-light);
+  color: var(--ibm-blue-dark);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.page-content { padding: 24px; flex: 1; max-width: 1100px; width: 100%; }
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.card {
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.card-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
+.card-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.stat-value { font-size: 1.8rem; font-weight: 700; color: var(--ibm-blue); }
+.stat-label { font-size: 0.78rem; color: var(--text-muted); }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px;
+  border: none; border-radius: var(--radius);
+  font-size: 0.875rem; font-weight: 500;
+  transition: all 0.15s;
+}
+.btn-primary { background: var(--ibm-blue); color: #fff; }
+.btn-primary:hover { background: var(--ibm-blue-dark); }
+.btn-secondary { background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--surface-2); }
+.btn-danger { background: var(--ibm-red); color: #fff; }
+.btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Forms ──────────────────────────────────────────────────── */
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 0.8rem; font-weight: 500; margin-bottom: 5px; color: var(--text-secondary); }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.875rem; font-family: inherit;
+  background: var(--surface-0); color: var(--text-primary);
+  transition: border-color 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--ibm-blue);
+  box-shadow: 0 0 0 2px var(--ibm-blue-light);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ── Tags / Chips ───────────────────────────────────────────── */
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--ibm-blue-light);
+  color: var(--ibm-blue-dark);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.75rem; font-weight: 500;
+}
+.tag-purple { background: #e8daff; color: #6929c4; }
+.tag-green { background: #defbe6; color: #198038; }
+.tag-teal { background: #d9fbfb; color: #005d5d; }
+
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ── Chat ────────────────────────────────────────────────────── */
+.chat-container {
+  display: flex; flex-direction: column;
+  height: calc(100vh - 120px); max-height: 700px;
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.chat-bubble {
+  max-width: 75%; padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.875rem; line-height: 1.5;
+}
+.chat-bubble.user {
+  background: var(--ibm-blue); color: #fff;
+  align-self: flex-end; border-bottom-right-radius: 4px;
+}
+.chat-bubble.assistant {
+  background: var(--surface-1); color: var(--text-primary);
+  align-self: flex-start; border-bottom-left-radius: 4px;
+  border: 1px solid var(--border);
+}
+.chat-input-row {
+  display: flex; gap: 8px; padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+.chat-input {
+  flex: 1; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: 20px;
+  font-size: 0.875rem; font-family: inherit;
+  background: var(--surface-1);
+}
+.chat-input:focus { outline: none; border-color: var(--ibm-blue); }
+
+/* ── Progress Bar ───────────────────────────────────────────── */
+.progress-bar { background: var(--surface-2); border-radius: 4px; height: 8px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--ibm-blue); border-radius: 4px; transition: width 0.4s; }
+
+/* ── Misc ────────────────────────────────────────────────────── */
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.section-title { font-size: 1.1rem; font-weight: 600; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+.badge-blue { background: var(--ibm-blue-light); color: var(--ibm-blue-dark); }
+.badge-green { background: #defbe6; color: #198038; }
+.spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid var(--ibm-blue-light); border-top-color: var(--ibm-blue); border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+.empty-state h3 { margin-bottom: 8px; color: var(--text-secondary); }
+
+.alert { padding: 12px 16px; border-radius: var(--radius); margin-bottom: 16px; font-size: 0.875rem; }
+.alert-info { background: var(--ibm-blue-light); color: var(--ibm-blue-dark); border: 1px solid #a6c8ff; }
+.alert-success { background: #defbe6; color: #198038; border: 1px solid #a7f0ba; }
+.alert-warn { background: #fdf6dd; color: #8e5e00; border: 1px solid #f1c21b; }
+
+/* ── Auth Pages ─────────────────────────────────────────────── */
+.auth-page {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #001141 0%, #0f3460 50%, #16213e 100%);
+  padding: 20px;
+}
+.auth-card {
+  background: var(--surface-0); border-radius: 12px;
+  padding: 36px 32px; width: 100%; max-width: 420px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.auth-logo { text-align: center; margin-bottom: 24px; }
+.auth-logo h1 { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+.auth-logo p { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+.auth-ibm { font-size: 0.7rem; color: var(--ibm-blue); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar { width: 200px; }
+  .main-content { margin-left: 200px; }
+  .form-row { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
