@@ -85,6 +85,6 @@ KEY NOVELTIES
 GITHUB REPOSITORY
 ================================================================================
 
-URL: https://github.com/[your-username]/career-counseling-companion
+URL: https://github.com/Prernabodke31/Career-Counseling-Companion
 
 ================================================================================
